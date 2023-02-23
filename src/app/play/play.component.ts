@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class PlayComponent {
 
+  constructor(
+    private location: Location
+  ) {};
+
+  endGame = () => {
+    this.location.historyGo(-2);
+  };
 }
