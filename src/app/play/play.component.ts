@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-play',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class PlayComponent {
 
+  constructor(
+    private router: Router  
+  ) {};
+
+  gameOver = () => {
+    this.router.navigateByUrl("/");
+  };
 }
