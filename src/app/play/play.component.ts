@@ -1,5 +1,5 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-play',
@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 export class PlayComponent {
 
   constructor(
-    private router: Router  
+    private loc: Location
   ) {};
 
   gameOver = () => {
-    this.router.navigateByUrl("/");
+    this.loc.historyGo(-2);
   };
 }
