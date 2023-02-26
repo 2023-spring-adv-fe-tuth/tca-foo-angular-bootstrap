@@ -8,7 +8,31 @@
     <div class="card-header">
         Leaderboard
     </div>
-    <div class="card-body">
+    <div 
+        class="card-body"
+        *ngIf="leaderboardData.length == 0"
+    >
         Play a game to see the leaderboard...
     </div>
+    <table 
+        class="table table-striped"
+        *ngIf="leaderboardData.length > 0"
+    >
+        <thead>
+            <tr>
+                <th scope="col">W</th>
+                <th scope="col">L</th>
+                <th scope="col">Avg</th>
+                <th scope="col">Player</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let leaderBoardPlayer of leaderboardData">
+                <td>{{ leaderBoardPlayer.wins }}</td>
+                <td>{{ leaderBoardPlayer.losses }}</td>
+                <td>{{ leaderBoardPlayer.avg }}</td>
+                <td>{{ leaderBoardPlayer.name }}</td>
+            </tr>
+        </tbody>
+    </table>    
 </div>
