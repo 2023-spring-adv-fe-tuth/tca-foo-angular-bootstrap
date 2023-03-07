@@ -4,8 +4,9 @@
     </p>
     <button 
         class="btn btn-outline-primary"
-        (click)="endGame()"
+        *ngFor="let p of gameSvc.setupInfo.players"
+        (click)="endGame(p)"
     >
-        Done
+        {{ p }} Won
     </button>
 </div>

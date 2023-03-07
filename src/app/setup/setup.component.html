@@ -3,9 +3,38 @@
         Some setup things go here...
     </p>
     <button 
-        class="btn btn-outline-primary"
+        class="btn btn-outline-primary mb-5"
         (click)="startGame()"
     >
         Start Game
     </button>
+ 
+    <div class="mb-3">
+        <input 
+            type="text" 
+            class="form-control"
+            placeholder="Enter player name"
+            [(ngModel)]="newPlayerName"
+        />
+        <button
+            class="btn btn-outline-primary"
+            (click)="addNewPlayer()"
+        >
+            Add
+        </button>
+    </div>    
+
+    <div 
+        class="form-check"
+        *ngFor="let p of players"
+    >
+        <label class="form-check-label">
+            <input 
+                class="form-check-input" 
+                type="checkbox"
+                [(ngModel)]="p.checked" 
+            />
+            {{ p.name }}
+        </label>
+    </div>
 </div>

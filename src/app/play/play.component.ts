@@ -11,14 +11,19 @@ export class PlayComponent {
 
   constructor(
     private location: Location
-    , private gameSvc: GameService
+    , public gameSvc: GameService
   ) {};
 
-  endGame = () => {
+  endGame = (winner: string) => {
     
+    console.log(
+      winner
+      , this.gameSvc.setupInfo.players
+    );
+
     this.gameSvc.addGameResult({
-      winner: "Larry"
-      , players: ["Larry", "Curly", "Moe"]
+      winner: winner
+      , players: this.gameSvc.setupInfo.players
     });
 
     this.location.historyGo(-2);
