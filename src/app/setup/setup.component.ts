@@ -57,4 +57,8 @@ export class SetupComponent implements OnInit {
 
     this.newPlayerName = "";
   }
+
+  get playersChosen() {
+    return this.players.some(x => x.checked);
+  }
 }
