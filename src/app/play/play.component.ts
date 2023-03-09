@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 
 @Component({
@@ -7,18 +7,25 @@ import { GameService } from '../game.service';
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.css']
 })
-export class PlayComponent {
+export class PlayComponent implements OnInit {
 
   constructor(
     private location: Location
     , private gameSvc: GameService
   ) {};
 
-  endGame = () => {
+  playersInGame: string[] = [];
+
+  ngOnInit(): void {
+    console.log(this.gameSvc.setupInfo);
+    this.playersInGame = this.gameSvc.setupInfo.players;
+  }
+
+  endGame = (winner: string) => {
     
     this.gameSvc.addGameResult({
-      winner: "Larry"
-      , players: ["Larry", "Curly", "Moe"]
+      winner: winner
+      , players: this.gameSvc.setupInfo.players
     });
 
     this.location.historyGo(-2);

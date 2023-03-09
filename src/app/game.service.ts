@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { 
   GameResult
-  , calculateLeaderboard,
-  addGameResult
+  , calculateLeaderboard
+  , addGameResult
+  , getPreviousPlayers
 } from './front-end-model';
 
 const hardcodedGameResults: GameResult[] = [
@@ -51,5 +52,17 @@ export class GameService {
 
   addGameResult = (resultToAdd: GameResult) => {
     this.gameResults = addGameResult(this.gameResults, resultToAdd);
+  };
+
+  getPreviousPlayers = () => {
+    return getPreviousPlayers(this.gameResults);
+  }
+
+  setupInfo: {
+    start: string
+    , players: string[]
+  } = {
+    start: ""
+    , players: []
   };
 }
