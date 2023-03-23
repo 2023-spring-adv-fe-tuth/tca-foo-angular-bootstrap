@@ -4,6 +4,9 @@
 export interface GameResult {
     winner: string;
     players: string[];
+
+    start: string;
+    end: string;
 };
 
 export interface LeaderboardPlayer {
@@ -74,3 +77,6 @@ export const addGameResult: AddGameResultFunc = (results, result) => [
     ...results 
     , result
 ];
+
+export const getLongestGameDuration = (results: GameResult[]) => Math.max(...results.map(x => new Date(x.end).getTime() - new Date(x.start).getTime()));
+export const getShortestGameDuration = (results: GameResult[]) => Math.min(...results.map(x => new Date(x.end).getTime() - new Date(x.start).getTime()));

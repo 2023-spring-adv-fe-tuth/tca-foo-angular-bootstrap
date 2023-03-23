@@ -26,6 +26,8 @@ export class PlayComponent implements OnInit {
     this.gameSvc.addGameResult({
       winner: winner
       , players: this.gameSvc.setupInfo.players
+      , start: this.gameSvc.setupInfo.start
+      , end: new Date().toISOString()
     });
 
     this.location.historyGo(-2);
