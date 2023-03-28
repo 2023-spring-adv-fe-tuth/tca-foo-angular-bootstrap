@@ -6,6 +6,7 @@ import {
   , getPreviousPlayers
   , getShortestGameDuration
   , getLongestGameDuration
+  , getAverageGameDurationByPlayerCount
 } from './front-end-model';
 
 const hardcodedGameResults: GameResult[] = [
@@ -64,6 +65,10 @@ export class GameService {
 
   calculateLeadboard = () => {
     return calculateLeaderboard(this.gameResults);
+  };
+
+  calculateAvgGameTimes = () => {
+    return getAverageGameDurationByPlayerCount(this.gameResults);
   };
 
   addGameResult = (resultToAdd: GameResult) => {

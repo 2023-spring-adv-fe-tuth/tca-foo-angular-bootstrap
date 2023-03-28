@@ -49,5 +49,24 @@
     <p>
       {{ longestGame }} longest game
     </p>
+    <table 
+        class="table"
+        *ngIf="avgGameTimeData.length > 0"
+    >
+        <thead>
+          <tr>
+            <th scope="col">Player Count</th>
+            <th scope="col">Avg Game Length</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let d of avgGameTimeData"
+          >
+            <td>{{ d.playerCount }}</td>
+            <td>{{ d.avgGameDuration }}</td>
+          </tr>
+        </tbody>
+      </table>
   </div>
 </div>

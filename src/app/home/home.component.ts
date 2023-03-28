@@ -16,6 +16,11 @@ export class HomeComponent implements OnInit {
 
   leaderboardData: LeaderboardPlayer[] = [];
 
+  avgGameTimeData: {
+    playerCount: number;
+    avgGameDuration: string;
+  }[] = [];
+
   shortestGame = "n/a";
   longestGame = "n/a";
 
@@ -24,6 +29,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.leaderboardData = this.gameSvc.calculateLeadboard();
     console.log(this.leaderboardData);
+
+    this.avgGameTimeData = this.gameSvc.calculateAvgGameTimes().map(x => ({
+      ...x
+      , avgGameDuration: this.format(x.avgGameDuration) as string
+    }));
+    console.log(this.avgGameTimeData);
 
     this.shortestGame = this.format(this.gameSvc.getShortestGameDuration()) as string;
     this.longestGame = this.format(this.gameSvc.getLongestGameDuration()) as string;
