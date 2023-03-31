@@ -7,6 +7,8 @@ export interface GameResult {
 
     start: string;
     end: string;
+
+    thatReallyCoolThingHappened: boolean;
 };
 
 export interface LeaderboardPlayer {
@@ -127,4 +129,9 @@ export const getAverageGameDurationByPlayerCount = (results: GameResult[]) => {
     ;
 };
 
+export const getPercentageOfGamesThatReallyCoolThingHappened = (results: GameResult[]) => {
+    return results.length > 0
+        ? results.filter(x => x.thatReallyCoolThingHappened).length / results.length
+        : 0
+};
 

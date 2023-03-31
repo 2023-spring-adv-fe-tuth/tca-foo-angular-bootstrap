@@ -28,8 +28,11 @@ export class PlayComponent implements OnInit {
       , players: this.gameSvc.setupInfo.players
       , start: this.gameSvc.setupInfo.start
       , end: new Date().toISOString()
+      , thatReallyCoolThingHappened: this.thatReallyCoolThingHappened
     });
 
     this.location.historyGo(-2);
   };
+
+  thatReallyCoolThingHappened = false;
 }

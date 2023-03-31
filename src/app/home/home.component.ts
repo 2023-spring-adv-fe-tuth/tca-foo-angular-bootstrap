@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
 
   shortestGame = "n/a";
   longestGame = "n/a";
+  coolThingPercentDisplay = "n/a";
 
   format = durationFormatter();
 
@@ -38,5 +39,7 @@ export class HomeComponent implements OnInit {
 
     this.shortestGame = this.format(this.gameSvc.getShortestGameDuration()) as string;
     this.longestGame = this.format(this.gameSvc.getLongestGameDuration()) as string;
+  
+    this.coolThingPercentDisplay = (this.gameSvc.getPercentageOfGamesThatReallyCoolThingHappened() * 100).toFixed(2) +"%";
   }
 }
