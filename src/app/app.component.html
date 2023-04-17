@@ -7,6 +7,20 @@
   <h2>
     Companion App
   </h2>
-  <hr />
+  <div class="mt-3">
+    <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Enter email address"
+        [(ngModel)]="emailKey"
+    >
+    <button
+        class="btn btn-outline-primary"
+        (click)="saveEmailKey()"
+    >
+        Save
+    </button>
+  </div>    
+<hr />
   <router-outlet></router-outlet>
 </div>
