@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LeaderboardPlayer } from '../front-end-model';
 import { GameService } from '../game.service';
 import { durationFormatter } from 'human-readable';
+import * as localforage from 'localforage';
 
 @Component({
   selector: 'app-home',
@@ -27,28 +28,52 @@ export class HomeComponent implements OnInit {
 
   format = durationFormatter();
 
-  ngOnInit(): void {
-    this.leaderboardData = this.gameSvc.calculateLeadboard();
-    console.log(this.leaderboardData);
+  async ngOnInit() {
 
-    this.avgGameTimeData = this.gameSvc.calculateAvgGameTimes().map(x => ({
-      ...x
-      , avgGameDuration: this.format(x.avgGameDuration) as string
-    }));
-    console.log(this.avgGameTimeData);
+    try {
 
-    const shortest = this.gameSvc.getShortestGameDuration();
-    this.shortestGame = Number.isInteger(shortest)
-      ? this.format(shortest) as string
-      : "n/a"
-    ;
+      this.emailAddress = await localforage.getItem("emailAddress") ?? "";
 
-    const longest = this.gameSvc.getLongestGameDuration();
-    this.longestGame = Number.isInteger(longest)
-      ? this.format(longest) as string
-      : "n/a"
-    ;
-  
-    this.coolThingPercentDisplay = (this.gameSvc.getPercentageOfGamesThatReallyCoolThingHappened() * 100).toFixed(2) +"%";
+      this.leaderboardData = this.gameSvc.calculateLeadboard();
+      console.log(this.leaderboardData);
+
+      this.avgGameTimeData = this.gameSvc.calculateAvgGameTimes().map(x => ({
+        ...x
+        , avgGameDuration: this.format(x.avgGameDuration) as string
+      }));
+      console.log(this.avgGameTimeData);
+
+      const shortest = this.gameSvc.getShortestGameDuration();
+      this.shortestGame = Number.isInteger(shortest)
+        ? this.format(shortest) as string
+        : "n/a"
+      ;
+
+      const longest = this.gameSvc.getLongestGameDuration();
+      this.longestGame = Number.isInteger(longest)
+        ? this.format(longest) as string
+        : "n/a"
+      ;
+    
+      this.coolThingPercentDisplay = (this.gameSvc.getPercentageOfGamesThatReallyCoolThingHappened() * 100).toFixed(2) +"%";
+    }
+
+  catch (err) {
+    console.error(err);
   }
+}
+
+  emailAddress = "";
+
+  saveEmailAddress = async () => {
+    try {
+      await localforage.setItem(
+        "emailAddress"
+        , this.emailAddress
+      );
+    }
+    catch (err) {
+      console.error(err);
+    }
+  };
 }
