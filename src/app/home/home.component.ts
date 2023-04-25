@@ -28,11 +28,17 @@ export class HomeComponent implements OnInit {
 
   format = durationFormatter();
 
-  async ngOnInit() {
+
+  init = async () => {
 
     try {
 
       this.emailAddress = await localforage.getItem("emailAddress") ?? "";
+
+      if (this.emailAddress.length > 0) {
+        this.gameSvc.setEmailKey(this.emailAddress);
+        await this.gameSvc.loadGamesFromCloud();
+      }
 
       this.leaderboardData = this.gameSvc.calculateLeadboard();
       console.log(this.leaderboardData);
@@ -61,6 +67,11 @@ export class HomeComponent implements OnInit {
   catch (err) {
     console.error(err);
   }
+
+};
+
+  async ngOnInit() {
+    await this.init();
 }
 
   emailAddress = "";
@@ -71,6 +82,9 @@ export class HomeComponent implements OnInit {
         "emailAddress"
         , this.emailAddress
       );
+
+      this.gameSvc.setEmailKey(this.emailAddress);
+      this.init();
     }
     catch (err) {
       console.error(err);
