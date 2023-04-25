@@ -37,8 +37,17 @@ export class HomeComponent implements OnInit {
     }));
     console.log(this.avgGameTimeData);
 
-    this.shortestGame = this.format(this.gameSvc.getShortestGameDuration()) as string;
-    this.longestGame = this.format(this.gameSvc.getLongestGameDuration()) as string;
+    const shortest = this.gameSvc.getShortestGameDuration();
+    this.shortestGame = Number.isInteger(shortest)
+      ? this.format(shortest) as string
+      : "n/a"
+    ;
+
+    const longest = this.gameSvc.getLongestGameDuration();
+    this.longestGame = Number.isInteger(longest)
+      ? this.format(longest) as string
+      : "n/a"
+    ;
   
     this.coolThingPercentDisplay = (this.gameSvc.getPercentageOfGamesThatReallyCoolThingHappened() * 100).toFixed(2) +"%";
   }
