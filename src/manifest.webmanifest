@@ -1,6 +1,6 @@
 {
-  "name": "tca-foo-angular-bootstrap",
-  "short_name": "tca-foo-angular-bootstrap",
+  "name": "Foo Companion App",
+  "short_name": "Foo App",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
